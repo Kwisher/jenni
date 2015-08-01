@@ -50,7 +50,7 @@ def google_ajax(query):
 
 def google_search(query):
     results = google_ajax(query)
-    try: return results['responseData']['results'][0]['unescapedUrl']
+    try: return results
     except IndexError: return None
     except TypeError:
         print results
@@ -77,16 +77,20 @@ def g(jenni, input):
     if not query:
         return jenni.reply('.g what?')
     query = query.encode('utf-8')
-    uri = google_search(query)
-    if uri:
-        if 'wikipedia.org/' in uri:
-            uri = uri.replace('http:', 'https:')
-        jenni.reply(uri)
-        if not hasattr(jenni, 'last_seen_uri'):
-            jenni.last_seen_uri = {}
-        jenni.last_seen_uri[input.sender] = uri
-    elif uri is False: jenni.reply("Problem getting data from Google.")
-    else: jenni.reply("No results found for '%s'." % query)
+    
+    links = google_search(query)
+    
+    for i in range(0, 3):
+        uri = links['responseData']['results'][i]['unescapedUrl']
+        if uri:
+            if 'wikipedia.org/' in uri:
+                uri = uri.replace('http:', 'https:')
+            jenni.reply(uri)
+            if not hasattr(jenni, 'last_seen_uri'):
+                jenni.bot.last_seen_uri = {}
+            jenni.bot.last_seen_uri[input.sender] = uri
+        elif uri is False: jenni.reply("Problem getting data from Google.")
+        else: jenni.reply("No results found for '%s'." % query)
 g.commands = ['g']
 g.priority = 'high'
 g.example = '.g swhack'
@@ -152,8 +156,8 @@ def bing(jenni, input):
     if uri:
         jenni.reply(uri)
         if not hasattr(jenni, 'last_seen_uri'):
-            jenni.last_seen_uri = {}
-        jenni.last_seen_uri[input.sender] = uri
+            jenni.bot.last_seen_uri = {}
+        jenni.bot.last_seen_uri[input.sender] = uri
     else: jenni.reply("No results found for '%s'." % query)
 bing.commands = ['bing']
 bing.example = '.bing swhack'
@@ -219,7 +223,7 @@ def duck_search(query):
         output = str()
         if m:
             for result in m:
-                if '/y.js?' not in result and '//ad.ddg.gg/' not in result and '.msn.com/' not in result:
+                if '/y.js?' not in result and '//ad.ddg.gg/' not in result:
                     ## ignore ads
                     output = result
                     break
@@ -275,15 +279,15 @@ def duck(jenni, input):
     uri = duck_search(query)
     if uri:
         jenni.say(uri)
-        if hasattr(jenni, 'last_seen_uri') and input.sender in jenni.last_seen_uri:
-            jenni.last_seen_uri[input.sender] = uri
+        if hasattr(jenni, 'last_seen_uri') and input.sender in jenni.bot.last_seen_uri:
+            jenni.bot.last_seen_uri[input.sender] = uri
 
     ## try to find any Zero-Click stuff
     result = duck_zero_click_api(query)
 
     if result and len(result) == 1:
-        if hasattr(jenni, 'last_seen_uri') and input.sender in jenni.last_seen_uri:
-            jenni.last_seen_uri[input.sender] = result[0]
+        if hasattr(jenni, 'last_seen_uri') and input.sender in jenni.bot.last_seen_uri:
+            jenni.bot.last_seen_uri[input.sender] = result[0]
 
     ## loop through zero-click results
     if result and len(result) >= 1:
