@@ -889,7 +889,7 @@ def forecastio_current_weather(jenni, input):
     ## required according to ToS by forecast.io
     output += ' (Powered by Forecast, forecast.io)'
     jenni.say(output)
-forecastio_current_weather.commands = ['wxi-ft', 'wx-ft', 'weather-ft', 'weather', 'wx']
+forecastio_current_weather.commands = ['w', 'wxi-ft', 'wx-ft', 'weather-ft', 'weather', 'wx']
 forecastio_current_weather.rate = 15
 
 
