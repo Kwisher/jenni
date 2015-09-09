@@ -11,20 +11,15 @@ More info:
 
 import re
 
-responses = {'Thanks, B0t' : 'You are welcome',
-             'Thanks, bot' : 'You are welcome',
-             'Thanks, b0t' : 'You are welcome',
-             'Thanks bot'  : 'You are welcome',
-             'Thanks B0t'  : 'You are welcome',
-             'Thanks b0t'  : 'You are welcome',
-             'Thankyou b0t'  : 'You are welcome',
-             'Thankyou, b0t'  : 'You are welcome',
-             'Thank-you b0t'  : 'You are welcome',
-             'Thanks-you, b0t'  : 'You are welcome',
-             'B0t: thank you' : 'You are welcome',
-             'B0t: thanks' : 'You are welcome',
-             'B0t: thankyou' : 'You are welcome',
-             'B0t: thank-you' : 'You are welcome',}
+responses = {'thanks, b0t' : 'You are welcome',
+                                             'thanks, bot' : 'You are welcome',
+                                             'thanks b0t'  : 'You are welcome',
+                                             'thankyou b0t'  : 'You are welcome',
+                                             'thanks-you, b0t'  : 'You are welcome',
+                                             'b0t: thank you' : 'You are welcome',
+                                             'b0t: thanks' : 'You are welcome',
+                                             'b0t: thankyou' : 'You are welcome',
+                                             'b0t: thank-you' : 'You are welcome'}
 
 def manners(jenni, input):
     question = re.sub('[?!]', '', input.groups()[0])
