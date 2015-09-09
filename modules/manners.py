@@ -19,7 +19,8 @@ responses = {'thanks, b0t' : 'You are welcome',
                                              'b0t: thank you' : 'You are welcome',
                                              'b0t: thanks' : 'You are welcome',
                                              'b0t: thankyou' : 'You are welcome',
-                                             'b0t: thank-you' : 'You are welcome'}
+                                             'b0t: thank-you' : 'You are welcome',
+                                             'b0t: fuck you' : 'You are a stain on humanity'}
 
 def manners(jenni, input):
     question = re.sub('[?!]', '', input.groups()[0])
