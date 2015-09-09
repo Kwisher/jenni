@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 """
 manners.py - jenni politeness Module
 Copyright 2015, EyeR
@@ -24,7 +24,7 @@ responses = {'Thanks, B0t' : 'You are welcome',
              'B0t: thank you' : 'You are welcome',
              'B0t: thanks' : 'You are welcome',
              'B0t: thankyou' : 'You are welcome',
-             'B0t: thank-you' : 'You are welcome',}
+             'B0t: thank-you' : 'You are welcome'}
 
 def manners(jenni, input):
     question = re.sub('[?!]', '', input.groups()[0])
