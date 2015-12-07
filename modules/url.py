@@ -365,7 +365,7 @@ def get_results(text, manual=False):
             url = url.replace('http:', 'https:')
 
         if 'git.io' in url:
-            url = ''.join(EXCLUSION_CHAR,url)
+            url = EXCLUSION_CHAR.join(url)
 
         bitly = url
 
