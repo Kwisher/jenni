@@ -364,9 +364,6 @@ def get_results(text, manual=False):
         if 'i.imgur.com' in url and url.startswith('http://'):
             url = url.replace('http:', 'https:')
 
-        if 'git.io' in url:
-            url = EXCLUSION_CHAR.join(url)
-
         bitly = url
 
         if not url.startswith(EXCLUSION_CHAR):
