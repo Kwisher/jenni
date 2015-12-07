@@ -37,6 +37,7 @@ BITLY_TRIGGER_LEN_TITLE = 20
 BITLY_TRIGGER_LEN_NOTITLE = 80
 EXCLUSION_CHAR = '!'
 IGNORE = list()
+IGNORE.append('git.io')
 
 # do not edit below this line unless you know what you're doing
 bitly_loaded = False
