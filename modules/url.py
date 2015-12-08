@@ -23,6 +23,7 @@ import time
 import urllib2
 import web
 
+
 # Place a file in your ~/jenni/ folder named, bitly.txt
 # and inside this file place your API key followed by a ','
 # and then your username. For example, the only line in that
@@ -36,8 +37,7 @@ BITLY_TRIGGER_LEN_TITLE = 20
 BITLY_TRIGGER_LEN_NOTITLE = 80
 EXCLUSION_CHAR = '!'
 IGNORE = list()
-
-USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; rv:24.0) Gecko/20100101 Firefox/24.0'
+IGNORE.append('git.io')
 
 # do not edit below this line unless you know what you're doing
 bitly_loaded = False
@@ -588,3 +588,4 @@ puny.commands = ['puny', 'idn', 'idna']
 
 if __name__ == '__main__':
     print __doc__.strip()
+
