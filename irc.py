@@ -15,7 +15,7 @@ import socket, asyncore, asynchat, ssl, select
 import os, codecs
 import errno
 
-IRC_CODES = ('251', '252', '254', '255', '265', '266', '250', '332', '333', '353', '366', '372', '375', '376', 'QUIT', 'NICK')
+IRC_CODES = ('251', '252', '254', '255', '265', '266', '250', '328', '332', '333', '353', '366', '372', '375', '376', 'QUIT', 'NICK')
 cwd = os.getcwd()
 
 class Origin(object):
@@ -231,7 +231,7 @@ class Bot(asynchat.async_chat):
         if not self.use_sasl and self.password:
             self.write(('PASS', self.password))
             # Store the fact that we authed, or at least tried
-            self.authed_attempted = True
+            self.auth_attempted = True
         self.write(('NICK', self.nick))
         self.write(('USER', self.user, '+iw', self.nick), self.name)
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env python2
 """
 Copyright 2010 Tamas Marki. All rights reserved.
 
@@ -33,8 +34,6 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import random
 from datetime import datetime, timedelta
 import time
-
-random.seed()
 
 away_last = 0
 
@@ -188,7 +187,8 @@ class UnoBot:
             for p in self.players:
                 self.players[p].append(self.getCard ())
         self.topCard = self.getCard()
-        while self.topCard in ['R', 'S', 'D2', 'W', 'WD4']: self.topCard = self.getCard()
+        while self.topCard.lstrip(self.colors) not in 'R S D2 W WD4':
+           self.topCard = self.getCard()
         self.currentPlayer = 1
         self.cardPlayed(jenni, self.topCard)
         self.showOnTurn(jenni)
@@ -291,7 +291,6 @@ class UnoBot:
 
         if len(self.playerOrder) > 4:
             ret *= 2
-            random.shuffle(ret)
 
         random.shuffle(ret)
 
