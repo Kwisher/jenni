@@ -29,6 +29,9 @@ except ImportError:
     print install_geopy
 
 
+r_from = re.compile(r'(?i)([+-]\d+):00 from')
+r_tag = re.compile(r'<(?!!)[^>]+>')
+
 def clean(txt, delim=''):
     '''Remove HTML entities from a given text'''
     if delim:
@@ -39,11 +42,14 @@ def clean(txt, delim=''):
 
 def location(name):
     try:
-        from geopy.geocoders import Nominatim
-        geolocator = Nominatim()
-        #raise ImportError
+        import geopy.geocoders as geo
+        geolocator = geo.GoogleV3()
     except ImportError:
         return 'ImportError', '', ''
+
+    geolocator.country_bias = str()
+    if re.match('\d{5}', name):
+        geolocator.country_bias = 'US'
 
     location = geolocator.geocode(name)
 
@@ -828,7 +834,7 @@ def forecastio_current_weather(jenni, input):
     ## required according to ToS by forecast.io
     output += ' (Powered by Forecast, forecast.io)'
     jenni.say(output)
-forecastio_current_weather.commands = ['wxi-ft', 'wx-ft', 'weather-ft', 'weather', 'wx']
+forecastio_current_weather.commands = ['w', 'wxi-ft', 'wx-ft', 'weather-ft', 'weather', 'wx']
 forecastio_current_weather.rate = 15
 
 
@@ -1045,3 +1051,4 @@ forecast_wg.rate = 15
 
 if __name__ == '__main__':
     print __doc__.strip()
+
